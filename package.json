@@ -1,0 +1,17 @@
+{
+  "name": "quorum-tech-assessment",
+  "version": "1.0.0",
+  "main": "index.js",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev:frontend": "pnpm -F frontend dev",
+    "dev:backend": "pnpm -F backend dev"
+  },
+  "keywords": [],
+  "author": "peueueu",
+  "license": "ISC",
+  "description": ""
+}
