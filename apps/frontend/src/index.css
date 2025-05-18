@@ -47,13 +47,16 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
+  --background: oklch(0.98 0.0106 291.96);
   --foreground: oklch(0.129 0.042 264.695);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.129 0.042 264.695);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.129 0.042 264.695);
   --primary: oklch(0.208 0.042 265.755);
+  --text-primary:oklch(0.28 0.0933 280.95);
+  --text-secondary: oklch(0.46 0.0773 282.97);
+  --row-hover: oklch(0.7 0.2151 285);
   --primary-foreground: oklch(0.984 0.003 247.858);
   --secondary: oklch(0.968 0.007 247.896);
   --secondary-foreground: oklch(0.208 0.042 265.755);
@@ -119,6 +122,27 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-[#221f54] text-foreground;
+    padding: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .tab-selected {
+    background-color: var(--row-hover) !important;
+    color: var(--color-gray-200) !important;
+    font-weight: bold !important;
+  }
+  table thead {
+    @apply bg-muted;
+  }
+  table tbody tr:hover {
+    @apply font-bold;
+    background-color: var(--row-hover) !important;
+    color: #e7e7e7;
+  }
+  table tbody tr:nth-of-type(odd) {
+    @apply bg-secondary;
+  }
+  table tbody tr:nth-of-type(even) {
+    @apply bg-primary-foreground;
   }
 }

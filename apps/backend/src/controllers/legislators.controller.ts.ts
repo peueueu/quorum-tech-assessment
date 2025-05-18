@@ -7,7 +7,7 @@ export class LegislatorsController {
     this.legislatorsService = new LegislatorsService();
   }
 
-  async getLegislators(req: Request, res: Response) {
+  async getLegislators(_: Request, res: Response) {
     try {
       const legislatorsStream = await this.legislatorsService.getLegislatorsSummary();
       res.setHeader('Content-Type', 'application/json');

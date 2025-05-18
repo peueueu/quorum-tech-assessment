@@ -34,7 +34,7 @@ export type LegislatorSummary = Legislator & {
 
 export type BillsSummary = {
   id: number
-  bill: string
+  title: string
   supporters: number
   opposers: number
   primarySponsor: string

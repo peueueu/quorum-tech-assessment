@@ -48,4 +48,9 @@ export class VotesService {
         .on('end', () => resolve(votes));
     });
   }
+
+  async getVoteByBillId(billId: number) {
+    const votes = await this.loadVotesFromCsv();
+    return votes.find((vote) => vote.billId === billId);
+  }
 }

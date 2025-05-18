@@ -39,24 +39,22 @@ export class LegislatorsService {
 
     for (const legislator of legislators) {
       const relatedVotes = voteResults.filter((vote) => vote.legislatorId === legislator.id);
-      console.log(relatedVotes)
-      const supportingVotesCounter = relatedVotes.filter((vote) => {
-        console.log(vote.voteType)
-        return vote.voteType === 1
-      }).length;
-      const opposingVotesCounter = relatedVotes.filter((vote) => {
-        console.log(vote.voteType)
-        return vote.voteType === 2
-      }).length;
+      const supportingVotesCounter = relatedVotes.filter((vote) => vote.voteType === VOTE_TYPE.YEA).length;
+      const opposingVotesCounter = relatedVotes.filter((vote) => vote.voteType === VOTE_TYPE.NAY).length;
 
       grouped.set(legislator.id.toString(), {
         id: legislator.id,
         name: legislator.name,
         supportedBills: supportingVotesCounter,
         opposedBills: opposingVotesCounter,
-      })
+      });
     }
 
     return Array.from(grouped.values());
+  }
+
+  async getLegislatorById(legislatorId: number) {
+    const legislators = await this.loadLegislatorsFromCsv();
+    return legislators.find((legislator) => legislator.id === legislatorId)
   }
 }
