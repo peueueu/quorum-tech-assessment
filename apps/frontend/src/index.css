@@ -56,7 +56,7 @@
   --primary: oklch(0.208 0.042 265.755);
   --text-primary:oklch(0.28 0.0933 280.95);
   --text-secondary: oklch(0.46 0.0773 282.97);
-  --row-hover: oklch(0.7 0.2151 285);
+  --row-hover: oklch(0.99 0.2151 285);
   --primary-foreground: oklch(0.984 0.003 247.858);
   --secondary: oklch(0.968 0.007 247.896);
   --secondary-foreground: oklch(0.208 0.042 265.755);
@@ -122,22 +122,33 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-[#221f54] text-foreground;
-    padding: 2rem;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    @apply bg-slate-500 text-foreground;
+    padding: 1.25rem;
+    font-family: 'Roboto';
+  }
+  .tab-trigger {
+    color: var(--color-gray-600) !important;
   }
   .tab-selected {
-    background-color: var(--row-hover) !important;
-    color: var(--color-gray-200) !important;
+    background-color: var(--color-indigo-500) !important;
+    color: var(--color-white) !important;
     font-weight: bold !important;
+  }
+  .tab-content {
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, .5);
   }
   table thead {
     @apply bg-muted;
   }
+  table thead tr {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  table tbody tr {
+    font-size: 1.25rem;
+  }
   table tbody tr:hover {
-    @apply font-bold;
-    background-color: var(--row-hover) !important;
-    color: #e7e7e7;
+    background-color: var(--color-slate-300) !important;
   }
   table tbody tr:nth-of-type(odd) {
     @apply bg-secondary;

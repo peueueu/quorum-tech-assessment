@@ -1,18 +1,16 @@
 import { useEffect, useState } from "react";
-import { LegislatorsTable } from "./components/ui/LegislatorsTable";
 import {
-  BILLS_COL_NAMES,
   Bill,
-  LEGISLATOR_COL_NAMES,
   Legislator,
 } from "./utils/types";
-import { BillsTable } from "./components/ui/BillsTable";
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
 } from "@shared/components/ui/tabs";
+import { DataTable } from "./components/ui/data-table";
+import { billsColumnsDef, legislatorsColumnsDef } from "./components/ui/columns";
 
 export default function App() {
   const [legislators, setLegislators] = useState<Legislator[]>([]);
@@ -22,11 +20,15 @@ export default function App() {
   );
 
   useEffect(() => {
-    fetch("/api/legislators")
+    fetch("/api/legislators", {
+      cache: "force-cache"
+    })
       .then((res) => res.json())
       .then((data) => setLegislators(data));
 
-    fetch("/api/bills")
+    fetch("/api/bills", {
+      cache: "force-cache"
+    })
       .then((res) => res.json())
       .then((data) => setBills(data));
   }, []);
@@ -36,16 +38,16 @@ export default function App() {
   return (
     <>
       <Tabs defaultValue="legislators" className="w-full" value={selectedTab}>
-        <TabsList className="grid w-full h-[40px] grid-cols-2 bg-gray-200">
+        <TabsList className="grid w-full h-[40px] grid-cols-2 bg-gray-300">
           <TabsTrigger
-            className={`text-md ${selectedTab === "legislators" && "tab-selected"}`}
+            className={`tab-trigger text-md ${selectedTab === "legislators" && "tab-selected"}`}
             value="legislators"
             onClick={() => setSelectedTab("legislators")}
           >
             Legislators
           </TabsTrigger>
           <TabsTrigger
-            className={`text-md ${selectedTab === "bills" && "tab-selected"}`}
+            className={`tab-trigger text-md ${selectedTab === "bills" && "tab-selected"}`}
             value="bills"
             onClick={() => setSelectedTab("bills")}
           >
@@ -54,12 +56,12 @@ export default function App() {
         </TabsList>
         <TabsContent
           value="legislators"
-          className="rounded-lg overflow-x-hidden"
+          className="tab-content rounded-lg overflow-x-hidden"
         >
-          <LegislatorsTable data={legislators} />
+          <DataTable columns={legislatorsColumnsDef} data={legislators} />
         </TabsContent>
-        <TabsContent value="bills" className="rounded-lg overflow-x-hidden">
-          <BillsTable data={bills} />
+        <TabsContent value="bills" className="tab-content rounded-lg overflow-x-hidden">
+          <DataTable columns={billsColumnsDef} data={bills} />
         </TabsContent>
       </Tabs>
     </>
